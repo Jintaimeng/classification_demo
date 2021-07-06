@@ -19,9 +19,9 @@ label_name = ["airplane",
               "truck"]
 
 
-train_list = glob.glob("/home/jinyue/PycharmProjects/cifar-10-python/data_batch_*")
+train_list = glob.glob("/home/jinyue/PycharmProjects/cifar-10-python/test_batch")
 print(train_list)
-save_path = "/home/jinyue/PycharmProjects/cifar-10-python/Train"
+save_path = "/home/jinyue/PycharmProjects/cifar-10-python/Test"
 for l in train_list:
     print(l)
     l_dict = unpickle(l)
