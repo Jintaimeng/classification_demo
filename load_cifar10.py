@@ -23,12 +23,12 @@ for idx, name in enumerate(label_name):
 def default_loader(path):
     return Image.open(path).convert("RGB")
 train_transform = transforms.Compose([
-    transforms.RandomResizedCrop((28, 28)),
+    transforms.RandomCrop(28),
     transforms.RandomHorizontalFlip(),
-    transforms.RandomVerticalFlip(),
-    transforms.RandomRotation(90),
-    transforms.RandomGrayscale(0.1),
-    transforms.ColorJitter(0.3, 0.3, 0.3, 0.3),
+    transforms.ToTensor()
+])
+test_transform = transforms.Compose([
+    transforms.Resize((28, 28)),
     transforms.ToTensor()
 ])
 class MyDataset(Dataset):
@@ -52,7 +52,7 @@ class MyDataset(Dataset):
 im_train_list = glob.glob("/home/jinyue/PycharmProjects/cifar-10-python/Train/*/*.png")
 im_test_list = glob.glob("/home/jinyue/PycharmProjects/cifar-10-python/Test/*/*.png")
 train_dataset = MyDataset(im_train_list, transform=train_transform)
-test_dataset = MyDataset(im_test_list, transform=transforms.ToTensor())
+test_dataset = MyDataset(im_test_list, transform=test_transform)
 train_data_loader = DataLoader(dataset=train_dataset, batch_size=6, shuffle=True, num_workers=4)
 test_data_loader = DataLoader(dataset=test_dataset, batch_size=6, shuffle=False, num_workers=4)
 print("num_of_train", len(train_dataset))
